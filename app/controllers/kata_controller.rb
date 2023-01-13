@@ -16,6 +16,16 @@ class KataController < ApplicationController
 
   # - - - - - - - - - - - - - - - - - -
 
+  def special_outcome colour
+    filename = "#{colour}.special"
+    if files.key?(filename)
+      files.delete(filename)
+      return "#{colour}_special"
+    else
+      return @outcome
+    end
+  end
+
   def run_tests
     kata = Kata.new(self, id)
     t1 = time.now
@@ -29,6 +39,11 @@ class KataController < ApplicationController
     @status = result['status']
     @log = result['log']
     @outcome = result['outcome']
+
+    @outcome = special_outcome 'green'
+    @outcome = special_outcome 'red'
+    @outcome = special_outcome 'amber'
+
     @light = {
       'index' => index,
       'colour' => @outcome,

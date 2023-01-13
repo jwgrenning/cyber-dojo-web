@@ -14,8 +14,11 @@ var cyberDojo = ((cd, $) => {
     // Eg don't show event[0] == creation
     switch (event.colour) {
     case 'red':
+    case 'red_special':
     case 'amber':
+    case 'amber_special':
     case 'green':
+    case 'green_special':
     case 'pulling':
     case 'timed_out':
     case 'faulty':

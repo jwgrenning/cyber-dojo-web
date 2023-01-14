@@ -46,7 +46,7 @@ class KataController < ApplicationController
     @outcome = special_outcome files, 'red'
     @outcome = special_outcome flies, 'amber'
 
-    @status += @special
+    #@status += @special
     @light = {
       'index' => index,
       'colour' => @outcome,

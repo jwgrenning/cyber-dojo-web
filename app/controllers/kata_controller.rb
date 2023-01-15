@@ -19,11 +19,10 @@ class KataController < ApplicationController
   def special_outcome files, colour
     filename = "#{colour}.special"
     if files.key?(filename)
-      special = " " + files[filename]
       files.delete(filename)
-      return "#{colour}_special", special
+      return "#{colour}_special"
     else
-      return @outcome, @special
+      return @outcome
     end
   end
 
@@ -40,13 +39,18 @@ class KataController < ApplicationController
     @status = result['status']
     @log = result['log']
     @outcome = result['outcome']
-    @special = ""
 
-    @outcome = special_outcome files, 'green'
-    @outcome = special_outcome files, 'red'
-    @outcome = special_outcome flies, 'amber'
+    @outcome = 'red_special' if files.key?('red.special')
+    @outcome = 'amber_special' if files.key?('amber.special')
+    @outcome = 'green_special' if files.key?('green.special')
+    files.delete('red.special')
+    files.delete('amber.special')
+    files.delete('green.special')
 
-    #@status += @special
+    # @outcome = special_outcome files, 'green'
+    # @outcome = special_outcome files, 'red'
+    # @outcome = special_outcome flies, 'amber'
+
     @light = {
       'index' => index,
       'colour' => @outcome,

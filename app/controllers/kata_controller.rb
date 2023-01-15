@@ -43,9 +43,9 @@ class KataController < ApplicationController
     @outcome = 'red_special' if files.key?('red.special')
     @outcome = 'amber_special' if files.key?('amber.special')
     @outcome = 'green_special' if files.key?('green.special')
-    files.delete('red.special')
-    files.delete('amber.special')
-    files.delete('green.special')
+    @created.delete('red.special')
+    @created.delete('amber.special')
+    @created.delete('green.special')
 
     # @outcome = special_outcome files, 'green'
     # @outcome = special_outcome files, 'red'

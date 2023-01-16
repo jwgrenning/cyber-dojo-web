@@ -16,16 +16,6 @@ class KataController < ApplicationController
 
   # - - - - - - - - - - - - - - - - - -
 
-  def special_outcome files, colour
-    filename = "#{colour}.special"
-    if files.key?(filename)
-      files.delete(filename)
-      return "#{colour}_special"
-    else
-      return @outcome
-    end
-  end
-
   def run_tests
     kata = Kata.new(self, id)
     t1 = time.now
@@ -40,16 +30,11 @@ class KataController < ApplicationController
     @log = result['log']
     @outcome = result['outcome']
 
-    @outcome = 'red_special' if files.key?('red.special')
-    @outcome = 'amber_special' if files.key?('amber.special')
-    @outcome = 'green_special' if files.key?('green.special')
-    @created.delete('red.special')
-    @created.delete('amber.special')
-    @created.delete('green.special')
-
-    # @outcome = special_outcome files, 'green'
-    # @outcome = special_outcome files, 'red'
-    # @outcome = special_outcome flies, 'amber'
+    if files.key?('outcome.special')
+      @outcome = "#{@outcome}_special"
+      @created.delete('outcome.special')
+      # @stderr = "#{@stderr}\nTDD warning: files: #{files['outcome.special']}"
+    end
 
     @light = {
       'index' => index,

@@ -33,7 +33,8 @@ class KataController < ApplicationController
     if files.key?('outcome.special')
       @outcome = "#{@outcome}_special"
       @created.delete('outcome.special')
-      # @stderr = "#{@stderr}\nTDD warning: files: #{files['outcome.special']}"
+      @changed.delete('outcome.special')
+      files.delete('outcome.special')
     end
 
     @light = {
